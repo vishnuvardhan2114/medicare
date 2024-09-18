@@ -16,8 +16,8 @@ export default function Auth() {
     e.preventDefault();
     try {
       const url = isLogin
-        ? `${backendUrl}/api/auth/login`
-        : `${backendUrl}/api/auth/register`;
+        ? `https://medicare-api-wdfq.onrender.com/api/auth/login`
+        : `https://medicare-api-wdfq.onrender.com/api/auth/register`;
       const { data } = await axios.post(url, form);
 
       if (isLogin) {
