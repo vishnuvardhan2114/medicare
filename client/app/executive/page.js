@@ -123,7 +123,7 @@ export default function Orders() {
 
       if (editMode) {
         // Update order
-        await axios.put(`http://localhost:5000/api/executive/${currentOrderId}`, orderData);
+        await axios.put(`https://medicare-8oha.onrender.com/api/executive/${currentOrderId}`, orderData);
         const updatedOrders = orders.map((order) =>
           order._id === currentOrderId ? { ...order, ...orderData } : order
         );
