@@ -19,7 +19,7 @@ connectDB();
 const corsOptions = {
   origin: 'http://localhost:3000',
   methods: 'GET,POST,PUT,DELETE', 
-  credential: true,
+  credentials: true,
   allowedHeaders: 'Content-Type,Authorization,x-auth-token', 
 };
 // Middleware
