@@ -76,7 +76,7 @@ export default function Orders() {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const { data } = await axios.get("https://localhost:5000/api/executive");
+        const { data } = await axios.get("http://localhost:5000/api/executive");
         console.log('Fetched Orders:', data); // Log the data to check its structure
         setOrders(data);
         setFilteredOrders(data); // Initialize filtered orders
@@ -123,7 +123,7 @@ export default function Orders() {
 
       if (editMode) {
         // Update order
-        await axios.put(`https://localhost:5000/api/executive/${currentOrderId}`, orderData);
+        await axios.put(`http://localhost:5000/api/executive/${currentOrderId}`, orderData);
         const updatedOrders = orders.map((order) =>
           order._id === currentOrderId ? { ...order, ...orderData } : order
         );
@@ -132,7 +132,7 @@ export default function Orders() {
         toast.success("Order updated successfully!");
       } else {
         // Create new order
-        const { data } = await axios.post("https://localhost:5000/api/executive", orderData);
+        const { data } = await axios.post("http://localhost:5000/api/executive", orderData);
         setOrders([...orders, data]);
         setFilteredOrders([...orders, data]);
         toast.success("Order created successfully!");

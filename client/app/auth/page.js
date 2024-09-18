@@ -15,8 +15,8 @@ export default function Auth() {
     e.preventDefault();
     try {
       const url = isLogin
-        ? "https://localhost:5000/api/auth/login"
-        : "https://localhost:5000/api/auth/register";
+        ? "http://localhost:5000/api/auth/login"
+        : "http://localhost:5000/api/auth/register";
       const { data } = await axios.post(url, form);
 
       if (isLogin) {

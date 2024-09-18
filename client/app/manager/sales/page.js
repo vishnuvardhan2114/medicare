@@ -65,7 +65,7 @@ export default function SalesExecutives() {
       try {
         const token = localStorage.getItem("token");
         const { data } = await axios.get(
-          "https://localhost:5000/api/manager/sales",
+          "http://localhost:5000/api/manager/sales",
           {
             headers: {
               "x-auth-token": token,
@@ -107,7 +107,7 @@ export default function SalesExecutives() {
       if (editMode) {
         // Update existing executive
         await axios.put(
-          `https://localhost:5000/api/manager/sales/${form.id}`,
+          `http://localhost:5000/api/manager/sales/${form.id}`,
           form,
           {
             headers: {
@@ -123,7 +123,7 @@ export default function SalesExecutives() {
       } else {
         // Add new executive
         const { data } = await axios.post(
-          "https://localhost:5000/api/manager/sales",
+          "http://localhost:5000/api/manager/sales",
           form,
           {
             headers: {
@@ -161,7 +161,7 @@ export default function SalesExecutives() {
   const handleFire = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`https://localhost:5000/api/manager/sales/${id}`, {
+      await axios.delete(`http://localhost:5000/api/manager/sales/${id}`, {
         headers: {
           "x-auth-token": token,
         },
