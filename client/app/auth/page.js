@@ -15,8 +15,8 @@ export default function Auth() {
     e.preventDefault();
     try {
       const url = isLogin
-        ? "http://localhost:5000/api/auth/login"
-        : "http://localhost:5000/api/auth/register";
+        ? "https://medicare-8oha.onrender.com/api/auth/login"
+        : "https://medicare-8oha.onrender.com/api/auth/register";
       const { data } = await axios.post(url, form);
 
       if (isLogin) {
