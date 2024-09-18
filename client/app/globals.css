@@ -2,3 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+.text-3d {
+    font-family: 'Arial', sans-serif;
+    font-weight: 700;
+    color: #fff;
+    position: relative;
+    display: inline-block;
+    font-size: 3rem;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 0 #000, 4px 4px 0 rgba(0, 0, 0, 0.6);
+  }
+  
+  .text-3d:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease-in-out;
+  }
+  

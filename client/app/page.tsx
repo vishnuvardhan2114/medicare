@@ -6,14 +6,13 @@ import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 import CallIcon from '@mui/icons-material/Call';
 import InfoIcon from '@mui/icons-material/Info';
 import PsychologyAltIcon from '@mui/icons-material/PsychologyAlt';
-import MenuIcon from '@mui/icons-material/Menu';
+import ArchiveIcon from '@mui/icons-material/Archive';
 
 export default function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [role, setRole] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  // Check login status and role from localStorage on component mount
   useEffect(() => {
     const token = localStorage.getItem('token');
     const userRole = localStorage.getItem('role');
@@ -28,49 +27,45 @@ export default function Home() {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
     setIsLoggedIn(false);
-    setDropdownOpen(false); // Close dropdown after logout
+    setDropdownOpen(false);
   };
 
   const handleProfileClick = () => {
-    setDropdownOpen(!dropdownOpen); // Toggle dropdown visibility
+    setDropdownOpen(!dropdownOpen);
   };
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-sans relative bg-[url('https://www.systemc.com/images/uploads/img-37-2345.webp')] bg-blend-screen bg-repeat-x bg-opacity-40 ">
-
-      <header className="row-start-1 flex justify-between items-center w-full">
-        <div className="flex justify-center items-center">
-          <img
-            src="https://www.systemc.com/images/uploads/img-31-2495.webp"
-            className="bg-opacity-80" 
-            alt="Pharmacy Management Logo"
-            width={120}
-            height={50}
-          />
+    <div className="grid grid-rows-[auto_1fr_auto] min-h-screen p-6 sm:p-12 gap-8 bg-[url('https://www.systemc.com/images/uploads/img-37-2345.webp')] bg-blend-overlay bg-cover bg-center">
+      {/* Header */}
+      <header className="flex justify-between items-center w-full">
+        <div className="flex items-center">
+          <Link href="/about">
+            <img
+              src="https://marketplace.canva.com/EAFn3gKy0PI/2/0/1600w/canva-blue-red-white-square-badge-simple-medical-clinic-logo-cLqojTt2k3A.jpg"
+              alt="Pharmacy Management Logo"
+              className="opacity-90"
+              width={60}
+              height={50}
+            />
+          </Link>
         </div>
-        <div className="flex gap-4 items-center">
-          {isLoggedIn && (
+        <div className="flex items-center gap-4">
+          {isLoggedIn ? (
             <div className="relative">
               <img
-                src="https://truckomat.com/wp-content/uploads/2019/06/avatar-960_720-e1562935069333.png" // Placeholder profile image
+                src="https://truckomat.com/wp-content/uploads/2019/06/avatar-960_720-e1562935069333.png"
                 alt="Profile"
-                className="rounded-full cursor-pointer"
+                className="rounded-full cursor-pointer transition duration-300 hover:opacity-80"
                 width={60}
                 height={60}
                 onClick={handleProfileClick}
               />
               {dropdownOpen && (
-                <div className="absolute top-full right-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-lg z-50">
-                  <div className="p-4">
-                    {/* <Link
-                      href="/profile"
-                      className="block text-sm font-medium text-gray-900 hover:bg-gray-100 p-2 rounded"
-                    >
-                      Edit Profile
-                    </Link> */}
+                <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-lg z-50">
+                  <div className="p-2">
                     <button
                       onClick={handleLogout}
-                      className="w-full mt-2 bg-red-500 text-white py-2 rounded hover:bg-red-600"
+                      className="w-full bg-red-500 text-white py-2 rounded hover:bg-red-600 transition"
                     >
                       Logout
                     </button>
@@ -78,11 +73,10 @@ export default function Home() {
                 </div>
               )}
             </div>
-          )}
-          {!isLoggedIn && (
+          ) : (
             <Link
               href="/auth"
-              className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-blue-500 text-white px-6 py-2 text-sm sm:text-base hover:bg-blue-600"
+              className="bg-blue-500 text-white px-4 py-2 rounded-full text-sm sm:text-base hover:bg-blue-600 transition shadow-lg"
             >
               Login
             </Link>
@@ -90,67 +84,76 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <h1 className="text-4xl font-bold text-center sm:text-left">
+      {/* Main Content */}
+      <main className="flex flex-col items-center gap-8 text-center sm:text-left">
+        <h1 className="text-3xl sm:text-4xl font-bold text-white shadow-sm drop-shadow-md">
           Welcome to the Pharmacy Management System
         </h1>
-        <p className="text-lg text-center sm:text-left">
+        <p className="text-lg text-white opacity-90">
           Manage your inventory, orders, and sales executives with ease.
         </p>
 
         {isLoggedIn && (
-          <div className="flex gap-4 items-center flex-col sm:flex-row">
+          <div className="flex flex-col sm:flex-row gap-4">
             {role === "Store Manager" && (
-              <Link
-                href="/manager"
-                className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-blue-500 text-white gap-2 hover:bg-blue-600 text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-              >
-                <DashboardIcon width={20} height={20} />
-                Manager Dashboard
-              </Link>
+              <>
+                <Link
+                  href="/manager"
+                  className="flex items-center justify-center bg-blue-500 text-white px-4 py-2 rounded-full text-sm sm:text-base gap-2 hover:bg-blue-600 transition shadow-lg"
+                >
+                  <DashboardIcon />
+                  Manager Dashboard
+                </Link>
+                <Link
+                  href="/manager/sales"
+                  className="flex items-center justify-center bg-green-500 text-white px-4 py-2 rounded-full text-sm sm:text-base gap-2 hover:bg-green-600 transition shadow-lg"
+                >
+                  <LocalHospitalIcon />
+                  Add Sales Executive
+                </Link>
+                <Link
+                  href="/executive"
+                  className="flex items-center justify-center bg-yellow-500 text-white px-4 py-2 rounded-full text-sm sm:text-base gap-2 hover:bg-yellow-600 transition shadow-lg"
+                >
+                  <ArchiveIcon />
+                  Order Management Dashboard
+                </Link>
+              </>
             )}
-            {role === "Sales Executive"  && (
+            {role === "Sales Executive" && (
               <Link
                 href="/executive"
-                className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-green-500 text-white gap-2 hover:bg-green-600 text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
+                className="flex items-center justify-center bg-green-500 text-white px-4 py-2 rounded-full text-sm sm:text-base gap-2 hover:bg-green-600 transition shadow-lg"
               >
-                <LocalHospitalIcon width={20} height={20} />
+                <LocalHospitalIcon />
                 Sales Executive Dashboard
-              </Link>
-            )}
-            {role === "Store Manager"  && (
-              <Link
-                href="/manager/sales"
-                className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-green-500 text-white gap-2 hover:bg-green-600 text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-              >
-                <LocalHospitalIcon width={20} height={20} />
-                Add Sales Executive 
               </Link>
             )}
           </div>
         )}
       </main>
 
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
+      {/* Footer */}
+      <footer className="flex flex-wrap gap-4 items-center justify-center text-white opacity-90">
         <Link
           href="/contact"
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
         >
-          <CallIcon height={16} width={16} />
+          <CallIcon />
           Contact Us
         </Link>
         <Link
           href="/about"
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
         >
-          <InfoIcon height={16} width={16} />
+          <InfoIcon />
           About Us
         </Link>
         <Link
           href="/support"
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
         >
-          <PsychologyAltIcon height={16} width={16} />
+          <PsychologyAltIcon />
           Support
         </Link>
       </footer>
