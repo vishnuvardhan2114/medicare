@@ -17,11 +17,12 @@ connectDB();
 
 // CORS Configuration
 const corsOptions = {
-  origin: 'http://localhost:3000',
-  methods: 'GET,POST,PUT,DELETE', 
+  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  methods: 'GET,POST,PUT,DELETE',
   credentials: true,
-  allowedHeaders: 'Content-Type,Authorization,x-auth-token', 
+  allowedHeaders: 'Content-Type,Authorization,x-auth-token',
 };
+
 // Middleware
 app.use(cors(corsOptions));
 app.use(express.json());
