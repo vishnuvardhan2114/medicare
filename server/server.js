@@ -17,11 +17,15 @@ connectDB();
 
 // CORS Configuration
 const corsOptions = {
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  origin: [
+    'https://medicare-frontend-delta.vercel.app', 
+    'https://medicare-frontend-c17dyc2y5-vishnus-projects-4236c2a9.vercel.app'
+  ], 
   methods: 'GET,POST,PUT,DELETE',
   credentials: true,
   allowedHeaders: 'Content-Type,Authorization,x-auth-token',
 };
+
 
 // Middleware
 app.use(cors(corsOptions));
