@@ -10,13 +10,14 @@ export default function Auth() {
   const [form, setForm] = useState({ username: "", password: "", role: "" });
   const [isLogin, setIsLogin] = useState(true);
   const router = useRouter();
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5000';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const url = isLogin
-        ? "http://localhost:5000/api/auth/login"
-        : "http://localhost:5000/api/auth/register";
+        ? `${backendUrl}/api/auth/login`
+        : `${backendUrl}/api/auth/register`;
       const { data } = await axios.post(url, form);
 
       if (isLogin) {

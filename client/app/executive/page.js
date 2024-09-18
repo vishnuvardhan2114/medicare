@@ -71,12 +71,12 @@ export default function Orders() {
   const [editMode, setEditMode] = useState(false);
   const [currentOrderId, setCurrentOrderId] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
-
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5000';
   // Fetch Orders
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const { data } = await axios.get("http://localhost:5000/api/executive");
+        const { data } = await axios.get(`${backendUrl}/api/executive`);
         console.log('Fetched Orders:', data); // Log the data to check its structure
         setOrders(data);
         setFilteredOrders(data); // Initialize filtered orders
@@ -123,7 +123,7 @@ export default function Orders() {
 
       if (editMode) {
         // Update order
-        await axios.put(`http://localhost:5000/api/executive/${currentOrderId}`, orderData);
+        await axios.put(`${backendUrl}/api/executive/${currentOrderId}`, orderData);
         const updatedOrders = orders.map((order) =>
           order._id === currentOrderId ? { ...order, ...orderData } : order
         );
@@ -132,7 +132,7 @@ export default function Orders() {
         toast.success("Order updated successfully!");
       } else {
         // Create new order
-        const { data } = await axios.post("http://localhost:5000/api/executive", orderData);
+        const { data } = await axios.post(`${backendUrl}/api/executive`, orderData);
         setOrders([...orders, data]);
         setFilteredOrders([...orders, data]);
         toast.success("Order created successfully!");
@@ -154,7 +154,7 @@ export default function Orders() {
   // Handle delete
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://localhost:5000/api/executive/${id}`);
+      await axios.delete(`${backendUrl}/api/executive/${id}`);
       const updatedOrders = orders.filter((order) => order._id !== id);
       setOrders(updatedOrders);
       setFilteredOrders(updatedOrders);

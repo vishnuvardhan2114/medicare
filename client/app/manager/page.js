@@ -43,6 +43,7 @@ export default function Medicines() {
   const [errors, setErrors] = useState({});
   const [search, setSearch] = useState("");
   const [isEditing, setIsEditing] = useState(false);
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5000';
 
   const router = useRouter(); // Initialize useRouter
 
@@ -50,7 +51,7 @@ export default function Medicines() {
   useEffect(() => {
     const fetchMedicines = async () => {
       try {
-        const { data } = await axios.get("http://localhost:5000/api/manager");
+        const { data } = await axios.get(`${backendUrl}/api/manager`);
         setMedicines(data);
         setFilteredMedicines(data);
       } catch (error) {
@@ -78,7 +79,7 @@ export default function Medicines() {
       const token = localStorage.getItem("token");
       if (isEditing) {
         // Update medicine
-        await axios.put(`http://localhost:5000/api/manager/${form.id}`, form, {
+        await axios.put(`${backendUrl}/api/manager/${form.id}`, form, {
           headers: {
             "x-auth-token": token,
             "Content-Type": "application/json",
@@ -89,7 +90,7 @@ export default function Medicines() {
         toast.success("Medicine updated successfully!");
       } else {
         // Add new medicine
-        const { data } = await axios.post("http://localhost:5000/api/manager", form, {
+        const { data } = await axios.post(`${backendUrl}/api/manager`, form, {
           headers: {
             "x-auth-token": token,
             "Content-Type": "application/json",
@@ -143,7 +144,7 @@ export default function Medicines() {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:5000/api/manager/${id}`, {
+      await axios.delete(`${backendUrl}/api/manager/${id}`, {
         headers: {
           "x-auth-token": token,
         },
