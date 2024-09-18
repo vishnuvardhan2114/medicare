@@ -17,6 +17,8 @@ connectDB();
 // CORS Configuration
 const corsOptions = {
   origin: [
+    'https://medicare-frontend-delta.vercel.app', 
+    'https://medicare-frontend-c17dyc2y5-vishnus-projects-4236c2a9.vercel.app',
     'https://medicare-frontend-9ql4szjq3-vishnus-projects-4236c2a9.vercel.app/'
   ], 
   methods: 'GET,POST,PUT,DELETE,OPTIONS',
